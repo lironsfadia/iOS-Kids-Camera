@@ -5,15 +5,16 @@ import * as SplashScreen from 'expo-splash-screen';
 import React, { useEffect } from 'react';
 import 'react-native-reanimated';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useColorScheme } from '~/hooks/useColorScheme';
+import { GluestackUIProvider } from '~/components/ui/gluestack-ui-provider';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  //const colorScheme = useColorScheme();
-  // const [loaded] = useFonts({
-  //   SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
-  // });
+  console.log('RootLayout');
+  const colorScheme = useColorScheme();
+  const [loaded] = [false];
 
   // useEffect(() => {
   //   if (loaded) {
@@ -25,19 +26,23 @@ export default function RootLayout() {
   //   return null;
   // }
 
+  useEffect(() => {
+    SplashScreen.hideAsync();
+  }, []);
+
   return (
     <GestureHandlerRootView>
-      {/* <GluestackUIProvider mode="dark"> */}
-      {/* <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}> */}
+      {/* <GluestackUIProvider mode="dark">
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}> */}
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="camera" options={{ headerShown: true }} />
-        <Stack.Screen name="settings" options={{ headerShown: true }} />
+        <Stack.Screen name="/(camera)/camera" options={{ headerShown: true }} />
+        <Stack.Screen name="(settings)/settings" options={{ headerShown: true }} />
         <Stack.Screen name="(login)/loginScreen" options={{ headerShown: true }} />
         <Stack.Screen name="+not-found" />
       </Stack>
-      {/* </ThemeProvider> */}
-      {/* </GluestackUIProvider> */}
+      {/* </ThemeProvider>
+      </GluestackUIProvider> */}
     </GestureHandlerRootView>
   );
 }

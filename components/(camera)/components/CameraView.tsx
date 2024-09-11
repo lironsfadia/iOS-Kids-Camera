@@ -54,7 +54,6 @@ const CameraView = ({
             flex: 1,
           }}
           device={device}
-          //format={format}
           isActive={isActive && cameraMode === 'camera'}
           photo={!isRecording}
           video={isRecording}
@@ -62,11 +61,11 @@ const CameraView = ({
           exposure={exposure}
           torch={torch}
           onInitialized={() => console.log('Camera initialized')}
-          resizeMode="cover" // 'cover' | 'contain'
+          resizeMode="cover"
           onError={onError}
           onUIRotationChanged={setUiRotation}
         />
-        <CameraOverlayButtons
+        {/* <CameraOverlayButtons
           cameraPosition={cameraPosition}
           cameraPositionHandler={setCameraPosition}
           flashMode={flashMode}
@@ -84,7 +83,7 @@ const CameraView = ({
           experimentalBlurMethod="dimezisBlurView" //android
         >
           <ThemedText style={{ color: 'white' }}>Exposure: {exposure} | Zoom: x(zoom)</ThemedText>
-        </BlurView>
+        </BlurView> */}
       </View>
       <View style={{ flex: 1 }}>
         <View style={{ flex: 0.7 }}>
@@ -103,7 +102,7 @@ const CameraView = ({
             justifyContent: 'space-evenly',
             alignItems: 'center',
           }}>
-          <CameraBottomButtons
+          {/* <CameraBottomButtons
             setZoom={setZoom}
             zoom={zoom}
             setShowZoomControls={setShowZoomControls}
@@ -114,7 +113,7 @@ const CameraView = ({
             onStartRecording={onStartRecording}
             isRecording={isRecording}
             uiRotation={uiRotation}
-          />
+          /> */}
         </View>
       </View>
     </>
