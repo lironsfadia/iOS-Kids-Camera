@@ -1,7 +1,8 @@
-import { StyleSheet, View, SafeAreaView, TouchableHighlight, Alert } from 'react-native';
+import { View, SafeAreaView, TouchableHighlight, Alert, Text } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { router, Stack } from 'expo-router';
+
 import { ICON_SIZE } from '~/components/(camera)/constants';
 import useCameraPermissions from '~/components/(camera)/hooks/useCameraPermissions';
 import PermissionBox from '~/components/(settings)/components/PermissionBox';
@@ -38,7 +39,6 @@ const Settings = () => {
   }, [cameraPermission, microphonePermission, isMediaLibraryPermissionGranted]);
 
   const handleCameraRequest = async () => {
-    console.log('sssj');
     try {
       await requestCameraPermission();
     } catch (error) {
@@ -88,26 +88,27 @@ const Settings = () => {
   ];
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ThemedView style={styles.container}>
+    <SafeAreaView className="flex-1">
+      <ThemedView customClassName="flex-1 p-4">
         <Stack.Screen options={{ headerShown: false }} />
         <ThemedText type="title">Settings</ThemedText>
 
-        <View style={styles.spacer} />
-        <View style={styles.spacer} />
+        <View className="p-3" />
 
-        <ThemedText type="subtitle" style={styles.subtitle}>
+        <ThemedText type="subtitle" customClassName="ml-2 flex-shrink">
           Camera needs access to a few permissions in order to work proprly
         </ThemedText>
-        <View style={styles.spacer} />
-        <View style={styles.row}>
+
+        <View className="p-3" />
+
+        <View className="flex-row gap-3">
           <Ionicons name={'lock-closed-outline'} size={24} color="orange" />
-          <ThemedText type="defaultSemiBold" style={styles.footnote}>
+          <ThemedText type="defaultSemiBold" customClassName="text-left font-bold tracking-wider">
             Required
           </ThemedText>
         </View>
-        <View style={styles.spacer} />
-        <View style={styles.permissionsContainer}>
+        <View className="p-3" />
+        <View className="items-start gap-3">
           {permissions.map(({ name, description, icon, value, requestHandler }) => (
             <PermissionBox
               title={name}
@@ -121,12 +122,11 @@ const Settings = () => {
           ))}
         </View>
 
-        <View style={styles.spacer} />
-        <View style={styles.spacer} />
+        <View className="p-7" />
 
         <TouchableHighlight
           onPress={handleContinue}
-          style={StyleSheet.compose(styles.row, styles.continueButton)}>
+          className="flex-row gap-10 self-center rounded-full border-2 border-white p-2.5">
           <Ionicons name="arrow-forward-outline" color={'white'} size={ICON_SIZE} />
         </TouchableHighlight>
       </ThemedView>
@@ -135,29 +135,3 @@ const Settings = () => {
 };
 
 export default Settings;
-
-const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20 },
-  subtitle: {
-    marginLeft: 10,
-    flexShrink: 1,
-  },
-  footnote: {
-    textAlign: 'left',
-    fontSize: 12,
-    fontWeight: 'bold',
-    letterSpacing: 2,
-  },
-  row: { flexDirection: 'row', gap: 10 },
-  permissionsContainer: { gap: 10 },
-  spacer: {
-    marginVertical: 8,
-  },
-  continueButton: {
-    padding: 10,
-    borderWidth: 2,
-    borderColor: 'white',
-    borderRadius: 50,
-    alignSelf: 'center',
-  },
-});

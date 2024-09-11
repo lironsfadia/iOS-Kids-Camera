@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, Pressable, StyleSheet } from 'react-native';
 import { Link, Stack } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import '../global.css';
 
 const description = `
 # Holga Camera App

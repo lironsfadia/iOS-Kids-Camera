@@ -41,11 +41,11 @@ const CameraScreen = () => {
     ...cameraProps
   } = CameraControls();
   const { hasPermissions } = useCameraPermissions();
-  console.log('ghsdahjgdasjhdgsajdshghjdsgjhdsag');
 
   if (hasPermissions !== undefined && !hasPermissions) {
     return <Redirect href="/settings" />;
   }
+
   if (!device) return <Text>Camera device not found</Text>;
 
   return (

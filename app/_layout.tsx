@@ -32,17 +32,17 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView>
-      {/* <GluestackUIProvider mode="dark">
-        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}> */}
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="/(camera)/camera" options={{ headerShown: true }} />
-        <Stack.Screen name="(settings)/settings" options={{ headerShown: true }} />
-        <Stack.Screen name="(login)/loginScreen" options={{ headerShown: true }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      {/* </ThemeProvider>
-      </GluestackUIProvider> */}
+      <GluestackUIProvider mode="dark">
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <Stack>
+            <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen name="/(camera)/camera" options={{ headerShown: true }} />
+            <Stack.Screen name="(settings)/settings" options={{ headerShown: true }} />
+            <Stack.Screen name="(login)/loginScreen" options={{ headerShown: true }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+        </ThemeProvider>
+      </GluestackUIProvider>
     </GestureHandlerRootView>
   );
 }
