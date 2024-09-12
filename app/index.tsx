@@ -9,7 +9,6 @@ const description = `
 Capture the essence of lo-fi photography with our Holga Camera App`;
 
 const Home = () => {
-  console.log('Home');
   return (
     <SafeAreaView style={styles.container}>
       <Stack.Screen options={{ title: 'Home' }} />

@@ -1,7 +1,6 @@
 import { View, SafeAreaView, TouchableHighlight } from 'react-native';
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { Stack } from 'expo-router';
 
 import { ICON_SIZE } from '~/components/(camera)/constants';
 import PermissionBox from '~/components/(settings)/components/PermissionBox';
@@ -13,14 +12,15 @@ import {
   REQUIRED_PERMISSIONS_TEXT,
 } from '~/components/(settings)/constants';
 import useSettings from '~/components/(settings)/hooks/useSettings';
+import { Stack } from 'expo-router';
 
 const Settings = () => {
   const { permissions, handleContinue } = useSettings();
 
   return (
     <SafeAreaView className="flex-1">
+      <Stack.Screen options={{ headerShown: false }} />
       <ThemedView customClassName="flex-1 p-4">
-        <Stack.Screen options={{ headerShown: false }} />
         <ThemedText type="title">{PERMISSIONS_TITLE_TEXT}</ThemedText>
 
         <View className="p-3" />
@@ -41,6 +41,7 @@ const Settings = () => {
         <View className="items-start gap-3">
           {permissions.map(({ name, description, icon, value, requestHandler }) => (
             <PermissionBox
+              key={name}
               title={name}
               text={description}
               icon={icon}

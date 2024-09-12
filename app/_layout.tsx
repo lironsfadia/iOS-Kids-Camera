@@ -49,13 +49,10 @@ export default function RootLayout() {
                 <SettingsButton iconColor={colorScheme === 'dark' ? 'white' : 'black'} />
               ),
             }}>
-            <Stack.Screen name="index" options={{ headerShown: true, title: '' }} />
-            <Stack.Screen
-              name="/camera"
-              options={{ headerShown: true, title: '', headerTintColor: 'white' }}
-            />
-            <Stack.Screen name="/settings" options={{ headerShown: false }} />
-            <Stack.Screen name="/loginScreen" options={{ headerShown: false }} />
+            <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen name="camera" options={{ headerShown: true }} />
+            <Stack.Screen name="settings" options={{ headerShown: false }} />
+            <Stack.Screen name="loginScreen" options={{ headerShown: false }} />
             <Stack.Screen name="+not-found" />
           </Stack>
         </ThemeProvider>
