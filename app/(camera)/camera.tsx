@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Stack } from 'expo-router';
-import { View, Text, StyleSheet, Platform, StatusBar, SafeAreaView } from 'react-native';
+import { Text, StyleSheet, Platform, StatusBar, SafeAreaView } from 'react-native';
 
 import CameraControls from '../../components/(camera)/components/CameraControls';
 import PhotoViewer from '../../components/(camera)/components/PhotoViewer';
@@ -50,8 +50,6 @@ const CameraScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Stack.Screen options={{ headerShown: false }} />
-
       {(photo || video) && (
         <PhotoViewer
           photo={photo}

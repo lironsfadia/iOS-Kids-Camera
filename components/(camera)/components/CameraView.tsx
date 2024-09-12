@@ -39,6 +39,8 @@ const CameraView = ({
   showExposureControls,
   setShowExposureControls,
 }: CameraViewProps) => {
+  //           <Ionicons name="arrow-forward-outline" color={'white'} size={ICON_SIZE} />
+
   return (
     <>
       <View style={{ flex: 2, borderRadius: 10, overflow: 'hidden' }}>
@@ -85,6 +87,7 @@ const CameraView = ({
           <ThemedText style={{ color: 'white' }}>Exposure: {exposure} | Zoom: x(zoom)</ThemedText>
         </BlurView> */}
       </View>
+
       <View style={{ flex: 1 }}>
         <View style={{ flex: 0.7 }}>
           <ThemedText>Max FPS: {device.formats[0].maxFps}</ThemedText>

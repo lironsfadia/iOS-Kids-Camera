@@ -16,7 +16,7 @@ const Home = () => {
       <View style={styles.content}>
         <Text style={styles.title}>Holga Camera App</Text>
         <Text style={styles.description}>{description}</Text>
-        <Link href="/(camera)/camera" asChild>
+        <Link href="/camera" asChild>
           <Pressable style={styles.button}>
             <Text style={styles.buttonText}>Go to Camera</Text>
           </Pressable>

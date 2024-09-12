@@ -1,12 +1,14 @@
+import React, { useEffect } from 'react';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
+
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import React, { useEffect } from 'react';
 import 'react-native-reanimated';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 import { useColorScheme } from '~/hooks/useColorScheme';
 import { GluestackUIProvider } from '~/components/ui/gluestack-ui-provider';
+import SettingsButton from '~/components/widgets/SettingsButton';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -34,11 +36,26 @@ export default function RootLayout() {
     <GestureHandlerRootView>
       <GluestackUIProvider mode="dark">
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-          <Stack>
-            <Stack.Screen name="index" options={{ headerShown: false }} />
-            <Stack.Screen name="/(camera)/camera" options={{ headerShown: true }} />
-            <Stack.Screen name="(settings)/settings" options={{ headerShown: true }} />
-            <Stack.Screen name="(login)/loginScreen" options={{ headerShown: true }} />
+          <Stack
+            screenOptions={{
+              headerShown: true,
+              headerTitle: '',
+              headerBackTitle: '',
+              headerTintColor: 'white',
+              headerStyle: {
+                backgroundColor: 'transparent',
+              },
+              headerRight: () => (
+                <SettingsButton iconColor={colorScheme === 'dark' ? 'white' : 'black'} />
+              ),
+            }}>
+            <Stack.Screen name="index" options={{ headerShown: true, title: '' }} />
+            <Stack.Screen
+              name="/camera"
+              options={{ headerShown: true, title: '', headerTintColor: 'white' }}
+            />
+            <Stack.Screen name="/settings" options={{ headerShown: false }} />
+            <Stack.Screen name="/loginScreen" options={{ headerShown: false }} />
             <Stack.Screen name="+not-found" />
           </Stack>
         </ThemeProvider>
