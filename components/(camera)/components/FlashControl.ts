@@ -9,7 +9,7 @@ const FlashControl = ({ mode, setMode }: FlashControlProps) => {
   }, [mode]);
 
   const flashIcon = useMemo(() => {
-    return mode === 'on' ? 'flash-outline' : 'flash-off-otline';
+    return mode === 'on' ? 'flash-outline' : 'flash-off-outline';
   }, [mode]);
 
   return { flashIcon, onPress };

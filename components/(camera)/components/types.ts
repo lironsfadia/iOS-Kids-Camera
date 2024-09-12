@@ -14,9 +14,13 @@ export interface CameraOverlayButtonsProps {
   torchMode: boolean;
   torchModeHandler: () => void;
   uiRotation: number;
+  cameraPosition: 'back' | 'front';
+  cameraPositionHandler: () => void;
 }
 
 export interface CameraControlsOutputs {
+  exposure: number;
+  batteryInfo: BatteryInfo | undefined;
   hasPermissions: boolean;
   zoom: number | undefined;
   requestPermission: () => void;
@@ -46,7 +50,7 @@ export interface CameraControlsOutputs {
   frameProcessor?: any;
   torch: boolean;
   setTorch: (mode: 'on' | 'off') => void;
-  cameraPosion: 'back' | 'front';
+  cameraPosition: 'back' | 'front';
   setCameraPosition: (position: 'back' | 'front') => void;
   showZoomControls: boolean;
   setShowZoomControls: (showZoomControls: boolean) => void;
@@ -79,6 +83,14 @@ export interface CameraViewProps {
   setShowZoomControls: (showZoomControls: boolean) => void;
   showExposureControls: boolean;
   setShowExposureControls: (showExposureControls: boolean) => void;
+  batteryInfo: BatteryInfo | undefined;
+}
+
+export interface BatteryInfo {
+  level?: number | undefined;
+  state?: string | undefined;
+  lowPowerMode?: boolean | undefined;
+  isCharging: boolean | undefined;
 }
 
 export interface FlashControlProps {

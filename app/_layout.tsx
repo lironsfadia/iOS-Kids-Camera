@@ -14,7 +14,6 @@ import SettingsButton from '~/components/widgets/SettingsButton';
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  console.log('RootLayout');
   const colorScheme = useColorScheme();
   const [loaded] = [false];
 

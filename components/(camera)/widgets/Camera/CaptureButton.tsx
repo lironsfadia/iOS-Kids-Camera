@@ -1,10 +1,10 @@
 import React from 'react';
 import { TouchableHighlight, View } from 'react-native';
 
-import useCaptureButton from '../hooks/useCaptureButton';
-import { CaptureButtonProps } from './types';
-import { MaterialIcons } from '@expo/vector-icons';
-import { ButtonIcon } from '~/components/ui/button';
+import useCaptureButton from '../../hooks/useCaptureButton';
+import { CaptureButtonProps } from '../../components/types';
+import { Ionicons } from '@expo/vector-icons';
+import { ICON_SIZE } from '../../constants';
 
 const CaptureButton = ({
   pressHandler,
@@ -22,7 +22,7 @@ const CaptureButton = ({
         onPress={pressHandler}
         onLongPress={longPressHandler}
         style={buttonStyles}>
-        <ButtonIcon as={MaterialIcons} name="photo-camera" size={48} />
+        <Ionicons name={'camera'} size={48} color={'black'} />
       </TouchableHighlight>
     </View>
   );

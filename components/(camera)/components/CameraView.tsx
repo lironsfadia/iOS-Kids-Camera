@@ -1,16 +1,15 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { View } from 'react-native';
+
 import { Camera } from 'react-native-vision-camera';
 import { BlurView } from 'expo-blur';
+import { Ionicons } from '@expo/vector-icons';
 
-import CaptureButton from './CaptureButton';
-import { CameraViewProps } from './types';
-import { View } from 'react-native';
-import ZoomButton from '../ui/ZoomButton';
-import ExposureButton from '../ui/ExposureButton';
 import CameraBottomButtons from './CameraBottomButtons';
 import CameraOverlayButtons from './CameraButtons';
 import { ThemedText } from '~/components/ThemedText';
+import AnimatedInfoSection from '../widgets/AnimatedInfoSection';
+import { CameraViewProps } from './types';
 
 const CameraView = ({
   device,
@@ -38,12 +37,11 @@ const CameraView = ({
   setShowZoomControls,
   showExposureControls,
   setShowExposureControls,
+  batteryInfo,
 }: CameraViewProps) => {
-  //           <Ionicons name="arrow-forward-outline" color={'white'} size={ICON_SIZE} />
-
   return (
     <>
-      <View style={{ flex: 2, borderRadius: 10, overflow: 'hidden' }}>
+      <View className="flex-[2]">
         <Camera
           ref={camera}
           codeScanner={codeScanner}
@@ -67,7 +65,26 @@ const CameraView = ({
           onError={onError}
           onUIRotationChanged={setUiRotation}
         />
-        {/* <CameraOverlayButtons
+        {/* // in ios UIVisualEffectView */}
+        <BlurView
+          intensity={60}
+          tint="dark"
+          className="absolute left-2 right-2 top-1 overflow-hidden rounded-2xl">
+          <View className="flex-row items-center justify-between px-4 py-2">
+            <View className="flex-row items-center">
+              <Ionicons name="eye-outline" size={20} color="white" />
+              <ThemedText className="ml-2 text-sm text-white">
+                Exposure: {exposure ? exposure.toFixed(1) : 0}
+              </ThemedText>
+            </View>
+            <View className="flex-row items-center">
+              <Ionicons name="scan-outline" size={20} color="white" />
+              <ThemedText className="ml-2 text-sm text-white">Zoom: {zoom.toFixed(1)}x</ThemedText>
+            </View>
+          </View>
+        </BlurView>
+
+        <CameraOverlayButtons
           cameraPosition={cameraPosition}
           cameraPositionHandler={setCameraPosition}
           flashMode={flashMode}
@@ -77,35 +94,21 @@ const CameraView = ({
           cameraModeHandler={setCameraMode}
           uiRotation={uiRotation}
         />
-        // in ios UIVisualEffectView
-        <BlurView
-          intensity={100}
-          tint="systemMaterialDark"
-          style={styles.blurView}
-          experimentalBlurMethod="dimezisBlurView" //android
-        >
-          <ThemedText style={{ color: 'white' }}>Exposure: {exposure} | Zoom: x(zoom)</ThemedText>
-        </BlurView> */}
       </View>
 
-      <View style={{ flex: 1 }}>
-        <View style={{ flex: 0.7 }}>
-          <ThemedText>Max FPS: {device.formats[0].maxFps}</ThemedText>
-          <ThemedText>
-            Width: {device.formats[0].photoWidth} Height:
-            {device.formats[0].photoHeight}
-          </ThemedText>
-          <ThemedText>Camera: {device.name}</ThemedText>
+      <View className="flex-1">
+        <View className="flex-[0.1]">
+          <AnimatedInfoSection device={device} batteryInfo={batteryInfo} />
         </View>
         <View
           style={{
-            flex: 1.1,
-            backgroundColor: 'red',
+            flex: 0.7,
+            backgroundColor: 'grey',
             flexDirection: 'row',
-            justifyContent: 'space-evenly',
-            alignItems: 'center',
+            justifyContent: 'center',
+            alignItems: 'space-between',
           }}>
-          {/* <CameraBottomButtons
+          <CameraBottomButtons
             setZoom={setZoom}
             zoom={zoom}
             setShowZoomControls={setShowZoomControls}
@@ -116,20 +119,12 @@ const CameraView = ({
             onStartRecording={onStartRecording}
             isRecording={isRecording}
             uiRotation={uiRotation}
-          /> */}
+            setExposure={() => {}}
+            exposure={exposure}
+          />
         </View>
       </View>
     </>
   );
 };
 export default CameraView;
-
-const styles = StyleSheet.create({
-  blurView: {
-    flex: 1,
-    position: 'absolute',
-    right: 0,
-    bottom: 0,
-    padding: 10,
-  },
-});

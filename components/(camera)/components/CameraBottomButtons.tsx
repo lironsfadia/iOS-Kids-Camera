@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import ExposureButton from '../ui/ExposureButton';
 import ZoomButton from '../ui/ZoomButton';
-import CaptureButton from './CaptureButton';
+import CaptureButton from '../widgets/Camera/CaptureButton';
 
 interface CameraBottomButtonsProps {
   setZoom: (zoom: number) => void;

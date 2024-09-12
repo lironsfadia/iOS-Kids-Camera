@@ -16,7 +16,7 @@ interface AnimatedCameraButtonProps {
   handleOptionsPress: (option: number) => void;
   containerStyle?: StyleProp<any>;
   options: string[] | number[];
-  selectedOption: string | undefined;
+  selectedOption: number | undefined;
   buttonTitleFormat: string;
 }
 

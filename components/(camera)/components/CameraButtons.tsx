@@ -2,11 +2,10 @@ import { StyleSheet, View } from 'react-native';
 import React from 'react';
 
 import { CameraOverlayButtonsProps } from './types';
-import FlashButton from '../ui/FlashButton';
-import QrButton from '../ui/QrButton';
-import SettingsButton from '../ui/SettingsButton';
-import FlashlightButton from '../ui/FlashlightButton';
-import CameraPositionButton from '../ui/CameraPositionButton';
+import FlashButton from '../widgets/Flash/FlashButton';
+import QrButton from '../widgets/Qr/QrButton';
+import FlashlightButton from '../widgets/FlashLight/FlashlightButton';
+import CameraPositionButton from '../widgets/CameraPosition/CameraPositionButton';
 import useCameraOverlayButtons from '../hooks/useCameraOverlayButtons';
 import { VStack } from '~/components/ui/vstack';
 
@@ -24,6 +23,7 @@ const CameraOverlayButtons = ({
     uiRotation,
     cameraModeHandler,
   });
+  console.log({ cameraPosition, cameraPositionHandler });
   return (
     <View style={containerStyle}>
       <VStack space="md">
@@ -31,7 +31,6 @@ const CameraOverlayButtons = ({
         <CameraPositionButton position={cameraPosition} togglePosition={cameraPositionHandler} />
         <FlashButton mode={flashMode} setMode={flashModeHandler} />
         <QrButton onPress={handleCameraMode} />
-        <SettingsButton />
       </VStack>
     </View>
   );

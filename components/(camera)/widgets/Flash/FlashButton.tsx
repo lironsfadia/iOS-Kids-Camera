@@ -1,10 +1,8 @@
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
 
-import FlashControl from '../components/FlashControl';
+import FlashControl from '../../components/FlashControl';
+import FuncCameraButton from '../../ui/FuncCameraButton';
 import { FlashIconProps } from './types';
-import { ICON_SIZE } from '@/app/(settings)/constants';
-import FuncCameraButton from './FuncCameraButton';
 
 const FlashButton = ({ mode, setMode }: FlashIconProps) => {
   const { flashIcon, onPress } = FlashControl({

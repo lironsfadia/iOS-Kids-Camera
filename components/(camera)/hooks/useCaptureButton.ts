@@ -1,10 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { useCaptureButtonProps } from '../components/types';
 
-export default function useCaptureButton({
-  uiRotation,
-  isRecording,
-}: useCaptureButtonProps) {
+export default function useCaptureButton({ uiRotation, isRecording }: useCaptureButtonProps) {
   const styles = StyleSheet.create({
     container: {
       position: 'absolute',
@@ -30,6 +27,8 @@ export default function useCaptureButton({
       width: 75,
       height: 75,
       borderRadius: 75,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   });
   const computedUiRotation = uiRotation > 0 ? uiRotation : uiRotation + 360;
@@ -51,10 +50,7 @@ export default function useCaptureButton({
     }
   };
 
-  const containerStyle = [
-    getContainerStyle(),
-    { transform: [{ rotate: `${uiRotation}deg` }] },
-  ];
+  const containerStyle = [getContainerStyle(), { transform: [{ rotate: `${uiRotation}deg` }] }];
 
   return { containerStyle, buttonStyles };
 }

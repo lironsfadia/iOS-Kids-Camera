@@ -8,7 +8,7 @@ import { ICON_SIZE } from '../constants';
 interface FuncCameraButtonProps {
   icon?: string;
   title?: string;
-  onPress: (isOn: boolean) => void;
+  onPress: () => void;
   containerStyle?: StyleProp<any>;
 }
 
@@ -16,10 +16,10 @@ const FuncCameraButton = ({ icon, title, onPress, containerStyle }: FuncCameraBu
   const colors = useThemeColor();
   return (
     <TouchableOpacity
-      style={[containerStyle, { backgroundColor: colors.background, borderRadius: 40 }]}
+      style={[containerStyle, { backgroundColor: 'white', borderRadius: 10, padding: 3 }]}
       onPress={onPress}>
-      {icon ? <Ionicons name={icon} size={ICON_SIZE} color="white" /> : null}
-      {title ? <ThemedText style={{ color: colors.text }}>{title}</ThemedText> : null}
+      {icon ? <Ionicons name={icon} size={ICON_SIZE} color={colors.icon} /> : null}
+      {title ? <ThemedText customClassName="text-white">{title}</ThemedText> : null}
     </TouchableOpacity>
   );
 };

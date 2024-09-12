@@ -19,9 +19,7 @@ const ExposureControls = ({
   exposure,
 }: ExposureControlsProps) => {
   const exposureOptions = useMemo(() => {
-    return Platform.OS === 'ios'
-      ? IOS_EXPOSURE_OPTIONS
-      : ANDROID_EXPOSURE_OPTIONS;
+    return Platform.OS === 'ios' ? IOS_EXPOSURE_OPTIONS : ANDROID_EXPOSURE_OPTIONS;
   }, []);
 
   const buttonTitle = useMemo(() => {

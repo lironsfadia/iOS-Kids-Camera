@@ -15,8 +15,7 @@ import {
 } from 'react-native-vision-camera';
 
 import RTNBatteryStatus from 'rtn-battery-status/js/NativeBatteryStatus';
-import { CameraControlsOutputs } from './types';
-import { Alert } from 'react-native';
+import { BatteryInfo, CameraControlsOutputs } from './types';
 
 const CameraControls = (): CameraControlsOutputs => {
   const [flashMode, setFlashMode] = useState<TakePhotoOptions['flash']>('off' as const);
@@ -30,10 +29,11 @@ const CameraControls = (): CameraControlsOutputs => {
   const [isActive, setIsActive] = useState(false);
   const [photo, setPhoto] = useState<PhotoFile | null>(null);
   const [video, setVideo] = useState<VideoFile | null>(null);
-  const [cameraPosion, setCameraPosition] = useState<'back' | 'front'>('back');
+  const [cameraPosition, setCameraPosition] = useState<'back' | 'front'>('back' as const);
+  const exposure = useRef(0);
 
   // telephoto-camera - is the default camera
-  const device = useCameraDevice(cameraPosion, {
+  const device = useCameraDevice(cameraPosition, {
     physicalDevices: ['ultra-wide-angle-camera'],
   });
   const camera = useRef<Camera>(null);
@@ -43,25 +43,22 @@ const CameraControls = (): CameraControlsOutputs => {
   const [zoom, setZoom] = useState(device?.neutralZoom);
   const [showZoomControls, setShowZoomControls] = useState(false);
   const [showExposureControls, setShowExposureControls] = useState(false);
+  const [batteryInfo, setBatteryInfo] = useState<BatteryInfo | undefined>(undefined);
 
-  const checkBattery = async () => {
-    try {
-      const batteryInfo = await RTNBatteryStatus?.getBatteryInfo();
-      const isCharging = await RTNBatteryStatus?.isCharging();
+  useEffect(() => {
+    const checkBattery = async () => {
+      try {
+        const batteryInfo = await RTNBatteryStatus?.getBatteryInfo();
+        const isCharging = await RTNBatteryStatus?.isCharging();
 
-      console.log(batteryInfo, isCharging);
-      Alert.alert(
-        'Battry Status',
-        String(batteryInfo?.level),
-        batteryInfo?.lowPowerMode,
-        isCharging
-      );
-    } catch (error) {
-      console.error('Error checking battery status:', error);
-    }
-  };
+        setBatteryInfo({ ...batteryInfo, isCharging });
+      } catch (error) {
+        console.error('Error checking battery status:', error);
+      }
+    };
 
-  //checkBattery();
+    checkBattery();
+  }, []);
 
   const format = device
     ? getCameraFormat(
@@ -195,12 +192,14 @@ const CameraControls = (): CameraControlsOutputs => {
     zoom,
     torch,
     setTorch,
-    cameraPosion,
+    cameraPosition,
     setCameraPosition,
     showZoomControls,
     setShowZoomControls,
     showExposureControls,
     setShowExposureControls,
+    batteryInfo,
+    exposure: exposure.current,
     //frameProcessor,
   };
 };

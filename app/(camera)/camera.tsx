@@ -30,13 +30,14 @@ const CameraScreen = () => {
     zoom,
     torch,
     setTorch,
-    cameraPosion,
+    cameraPosition,
     setCameraPosition,
     showZoomControls,
     setShowZoomControls,
     showExposureControls,
     setShowExposureControls,
-
+    batteryInfo,
+    exposure,
     //frameProcessor,
     ...cameraProps
   } = CameraControls();
@@ -67,9 +68,9 @@ const CameraScreen = () => {
           zoom={zoom}
           setTorch={setTorch}
           torch={torch}
-          cameraPosion={cameraPosion}
+          cameraPosition={cameraPosition}
           setCameraPosition={setCameraPosition}
-          exposure={0}
+          exposure={exposure}
           isActive={isActive}
           cameraMode={cameraMode}
           isRecording={isRecording}
@@ -82,6 +83,7 @@ const CameraScreen = () => {
           setShowZoomControls={setShowZoomControls}
           showExposureControls={showExposureControls}
           setShowExposureControls={setShowExposureControls}
+          batteryInfo={batteryInfo}
           {...cameraProps}
         />
       )}
