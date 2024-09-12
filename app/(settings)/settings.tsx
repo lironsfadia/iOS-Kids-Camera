@@ -1,102 +1,32 @@
-import { View, SafeAreaView, TouchableHighlight, Alert, Text } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import { View, SafeAreaView, TouchableHighlight } from 'react-native';
+import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { router, Stack } from 'expo-router';
+import { Stack } from 'expo-router';
 
 import { ICON_SIZE } from '~/components/(camera)/constants';
-import useCameraPermissions from '~/components/(camera)/hooks/useCameraPermissions';
 import PermissionBox from '~/components/(settings)/components/PermissionBox';
 import { ThemedText } from '~/components/ThemedText';
 import { ThemedView } from '~/components/ThemedView';
-import useThemeColor from '~/constants/Colors';
+import {
+  PERMISSIONS_SUBTITLE_TEXT,
+  PERMISSIONS_TITLE_TEXT,
+  REQUIRED_PERMISSIONS_TEXT,
+} from '~/components/(settings)/constants';
+import useSettings from '~/components/(settings)/hooks/useSettings';
 
 const Settings = () => {
-  enum PermissionStatus {
-    NOT_DETERMINED = 'not-determined',
-    GRANTED = 'granted',
-  }
-
-  const theme = useThemeColor();
-  const [isCameraPermissionSet, setIsCameraPermissionSet] = useState<boolean>(false);
-  const [isMicPermissionSet, setIsMicPermissionSet] = useState<boolean>(false);
-  const [isMediaLibPermissionSet, setIsMediaLibPermissionSet] = useState<boolean | undefined>(
-    false
-  );
-
-  const {
-    requestCameraPermission,
-    requestMicrophonePermission,
-    requestMediaLibraryPermission,
-    cameraPermission,
-    microphonePermission,
-    isMediaLibraryPermissionGranted,
-  } = useCameraPermissions();
-
-  useEffect(() => {
-    setIsCameraPermissionSet(cameraPermission);
-    setIsMediaLibPermissionSet(isMediaLibraryPermissionGranted);
-    setIsMicPermissionSet(microphonePermission);
-  }, [cameraPermission, microphonePermission, isMediaLibraryPermissionGranted]);
-
-  const handleCameraRequest = async () => {
-    try {
-      await requestCameraPermission();
-    } catch (error) {
-      console.log(error);
-    }
-    console.log(cameraPermission);
-  };
-
-  const handleMicRequest = async () => {
-    await requestMicrophonePermission();
-  };
-
-  const handleMediaLibRequest = async () => {
-    await requestMediaLibraryPermission();
-  };
-
-  const handleContinue = () => {
-    if (isCameraPermissionSet && isMicPermissionSet && isMediaLibPermissionSet) {
-      router.replace('/camera');
-    } else {
-      Alert.alert('Please go to settings and enable permissions');
-    }
-  };
-
-  const permissions = [
-    {
-      name: 'Camera',
-      description: 'Used for taking photos and videos.',
-      icon: 'camera',
-      value: isCameraPermissionSet,
-      requestHandler: handleCameraRequest,
-    },
-    {
-      name: 'Microphone',
-      description: 'Used for recording videos.',
-      icon: 'mic-circle-outline',
-      value: isMicPermissionSet,
-      requestHandler: handleMicRequest,
-    },
-    {
-      name: 'Media Library',
-      description: 'Used for saving, viewing and more.',
-      icon: 'library-outline',
-      value: isMediaLibPermissionSet,
-      requestHandler: handleMediaLibRequest,
-    },
-  ];
+  const { permissions, handleContinue } = useSettings();
 
   return (
     <SafeAreaView className="flex-1">
       <ThemedView customClassName="flex-1 p-4">
         <Stack.Screen options={{ headerShown: false }} />
-        <ThemedText type="title">Settings</ThemedText>
+        <ThemedText type="title">{PERMISSIONS_TITLE_TEXT}</ThemedText>
 
         <View className="p-3" />
 
         <ThemedText type="subtitle" customClassName="ml-2 flex-shrink">
-          Camera needs access to a few permissions in order to work proprly
+          {PERMISSIONS_SUBTITLE_TEXT}
         </ThemedText>
 
         <View className="p-3" />
@@ -104,7 +34,7 @@ const Settings = () => {
         <View className="flex-row gap-3">
           <Ionicons name={'lock-closed-outline'} size={24} color="orange" />
           <ThemedText type="defaultSemiBold" customClassName="text-left font-bold tracking-wider">
-            Required
+            {REQUIRED_PERMISSIONS_TEXT}
           </ThemedText>
         </View>
         <View className="p-3" />
@@ -116,8 +46,6 @@ const Settings = () => {
               icon={icon}
               switchValue={value}
               onToggle={requestHandler}
-
-              //async () => await requestMediaLibraryPermission()
             />
           ))}
         </View>

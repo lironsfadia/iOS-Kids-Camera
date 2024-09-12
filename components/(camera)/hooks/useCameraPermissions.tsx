@@ -1,10 +1,10 @@
 import * as MediaLibrary from 'expo-media-library';
-import { Camera, useCameraPermission } from 'react-native-vision-camera';
+import { useCameraPermission } from 'react-native-vision-camera';
 import { useCallback, useEffect, useState } from 'react';
 
 const useCameraPermissions = () => {
   const [hasPermissions, setHasPermissions] = useState<boolean | undefined>();
-  const [mediaLibraryPermission] = MediaLibrary.usePermissions();
+  const [mediaLibraryPermission, requestPermissionsAsync] = MediaLibrary.usePermissions();
   const { hasPermission: cameraPermission, requestPermission: requestCameraPermission } =
     useCameraPermission();
 
@@ -13,10 +13,7 @@ const useCameraPermissions = () => {
 
   const requestMediaLibraryPermission = useCallback(async () => {
     try {
-      console.log('eee1');
-      await MediaLibrary.requestPermissionsAsync();
-
-      console.log('eee2', MediaLibrary);
+      await requestPermissionsAsync();
     } catch (error) {
       console.error('Error requesting media library permission:', error);
     }

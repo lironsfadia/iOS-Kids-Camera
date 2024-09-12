@@ -10,7 +10,7 @@ interface PermissionBoxProps {
   title: string;
   text: string;
   icon: string;
-  switchValue: boolean;
+  switchValue: boolean | undefined;
   onToggle: () => void;
 }
 
