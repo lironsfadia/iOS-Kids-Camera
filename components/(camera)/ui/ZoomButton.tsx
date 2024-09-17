@@ -40,7 +40,8 @@ const ZoomButton = ({
           onPress={onPressZoomControls}
           handleOptionsPress={handleZoomPress}
           selectedOption={zoom}
-          containerStyle={containerStyle}
+          containerStyle={'absolute bottom-3 left-0 right-0 items-center justify-center'}
+          side="left"
         />
       ) : null}
     </>

@@ -17,21 +17,21 @@ const ExposureButton = ({
   exposure,
   showExposureControls,
 }: ExposureButtonProps) => {
-  const {
-    onPressExposureControls,
-    containerStyle,
-    handleExposurePress,
-    exposureOptions,
-    buttonTitle,
-  } = ExposureControls({
-    handleExposure,
-    handleShowExposureControls,
-    exposure,
-  });
+  const { onPressExposureControls, handleExposurePress, exposureOptions, buttonTitle } =
+    ExposureControls({
+      handleExposure,
+      handleShowExposureControls,
+      exposure,
+      showExposureControls,
+    });
 
   return (
     <>
-      <FuncCameraButton title={buttonTitle} onPress={onPressExposureControls} />
+      <FuncCameraButton
+        title={buttonTitle}
+        onPress={onPressExposureControls}
+        containerStyle={{ width: 30, height: 30, borderRadius: 20, backgroundColor: 'grey' }}
+      />
 
       {showExposureControls ? (
         <AnimatedCameraButton
@@ -40,7 +40,8 @@ const ExposureButton = ({
           onPress={onPressExposureControls}
           handleOptionsPress={handleExposurePress}
           selectedOption={exposure}
-          containerStyle={containerStyle}
+          side="right"
+          containerStyle={'absolute right-10 items-center justify-start bg-gray-800 rounded-2xl'}
         />
       ) : null}
     </>

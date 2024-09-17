@@ -12,11 +12,13 @@ interface ExposureControlsProps {
   handleExposure: (exposure: number) => void;
   handleShowExposureControls: (show: boolean) => void;
   exposure: number | undefined;
+  showExposureControls: boolean;
 }
 const ExposureControls = ({
   handleExposure,
   handleShowExposureControls,
   exposure,
+  showExposureControls,
 }: ExposureControlsProps) => {
   const exposureOptions = useMemo(() => {
     return Platform.OS === 'ios' ? IOS_EXPOSURE_OPTIONS : ANDROID_EXPOSURE_OPTIONS;
@@ -35,22 +37,13 @@ const ExposureControls = ({
     }
   }, []);
 
-  const containerStyle = useMemo(() => {
-    return {
-      alignSelf: 'center',
-    };
-  }, []);
+  const onPressExposureControls = useCallback(() => {
+    handleShowExposureControls(!showExposureControls);
+  }, [handleShowExposureControls, showExposureControls]);
 
-  const onPressExposureControls = useCallback(
-    (show: boolean) => {
-      handleShowExposureControls(!show);
-    },
-    [handleShowExposureControls]
-  );
   return {
     exposureOptions,
     onPressExposureControls,
-    containerStyle,
     handleExposurePress,
     buttonTitle,
   };

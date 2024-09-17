@@ -17,6 +17,7 @@ interface AnimatedCameraButtonProps {
   options: string[] | number[];
   selectedOption: number | undefined;
   buttonTitleFormat: string;
+  side: 'left' | 'right';
 }
 
 const AnimatedCameraButton = ({
@@ -26,9 +27,11 @@ const AnimatedCameraButton = ({
   handleOptionsPress,
   selectedOption,
   buttonTitleFormat,
+  side,
 }: AnimatedCameraButtonProps) => {
   const buttonTitle = buttonTitleFormat.replace('{0}', selectedOption?.toString() ?? '');
   const { width, height } = useWindowDimensions();
+  //const radius = Math.min(width, height - 100) * 0.25;
   const radius = Math.min(width, height - 100) * 0.25;
 
   const enrichedOptions = options.map((option) => {
@@ -39,9 +42,14 @@ const AnimatedCameraButton = ({
   });
 
   return (
-    <View className="absolute bottom-3 left-0 right-0 items-center justify-center">
+    <View className={containerStyle}>
       {enrichedOptions.map(({ optionValue, onOptionPress }, index) => {
-        const angle = (index / options.length / 3) * 2 * Math.PI - Math.PI / 2; // Start at 12 o'clock
+        let angle;
+        if (side === 'left') {
+          angle = (index / options.length / 3) * 2 * Math.PI - Math.PI / 2;
+        } else {
+          angle = ((index / options.length / 3) * 2 * Math.PI + Math.PI / 2) * -1;
+        }
         const x = Math.cos(angle) * radius;
         const y = Math.sin(angle) * radius;
 
