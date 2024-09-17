@@ -9,7 +9,7 @@ const FlashButton = ({ mode, setMode }: FlashIconProps) => {
     mode,
     setMode,
   });
-  return <FuncCameraButton icon={flashIcon} onPress={onPress} />;
+  return <FuncCameraButton icon={flashIcon} onPress={onPress} containerStyle={'bg-white'} />;
 };
 
 export default FlashButton;

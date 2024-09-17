@@ -12,7 +12,7 @@ import Animated, { BounceIn } from 'react-native-reanimated';
 
 interface AnimatedCameraButtonProps {
   onPress: () => void;
-  handleOptionsPress: (option: number) => void;
+  handleOptionsPress: (option: string) => void;
   containerStyle?: StyleProp<any>;
   options: string[] | number[];
   selectedOption: number | undefined;
@@ -26,24 +26,24 @@ const AnimatedCameraButton = ({
   options,
   handleOptionsPress,
   selectedOption,
-  buttonTitleFormat,
   side,
 }: AnimatedCameraButtonProps) => {
-  const buttonTitle = buttonTitleFormat.replace('{0}', selectedOption?.toString() ?? '');
   const { width, height } = useWindowDimensions();
-  //const radius = Math.min(width, height - 100) * 0.25;
   const radius = Math.min(width, height - 100) * 0.25;
 
   const enrichedOptions = options.map((option) => {
     return {
       optionValue: option,
-      onOptionPress: () => handleOptionsPress(Number(option)),
+      onOptionPress: () => {
+        handleOptionsPress(option);
+      },
     };
   });
 
   return (
     <View className={containerStyle}>
       {enrichedOptions.map(({ optionValue, onOptionPress }, index) => {
+        console.log({ selectedOption, optionValue });
         let angle;
         if (side === 'left') {
           angle = (index / options.length / 3) * 2 * Math.PI - Math.PI / 2;
@@ -96,7 +96,7 @@ const AnimatedCameraButton = ({
           left: 30,
           top: height / 4,
         }}>
-        <Text style={{ color: 'white', fontWeight: '600' }}>X</Text>
+        <Text style={{ color: 'black', fontWeight: '600' }}>X</Text>
       </TouchableOpacity>
     </View>
   );

@@ -38,6 +38,7 @@ const CameraView = ({
   showExposureControls,
   setShowExposureControls,
   batteryInfo,
+  setExposure,
 }: CameraViewProps) => {
   return (
     <>
@@ -79,7 +80,7 @@ const CameraView = ({
             </View>
             <View className="flex-row items-center">
               <Ionicons name="scan-outline" size={20} color="white" />
-              <ThemedText className="ml-2 text-sm text-white">Zoom: {zoom.toFixed(1)}x</ThemedText>
+              <ThemedText className="ml-2 text-sm text-white">Zoom: {zoom?.toFixed(1)}x</ThemedText>
             </View>
           </View>
         </BlurView>
@@ -112,8 +113,8 @@ const CameraView = ({
             onStartRecording={onStartRecording}
             isRecording={isRecording}
             uiRotation={uiRotation}
-            setExposure={() => {}}
             exposure={exposure}
+            setExposure={setExposure}
           />
         </View>
       </View>

@@ -5,20 +5,22 @@ import {
   NATURAL_ZOOM,
   IOS_EXPOSURE_OPTIONS,
   ANDROID_EXPOSURE_OPTIONS,
+  DEFAULT_EXPOSURE,
 } from '../constants';
 import { Platform } from 'react-native';
 
 interface ExposureControlsProps {
-  handleExposure: (exposure: number) => void;
   handleShowExposureControls: (show: boolean) => void;
   exposure: number | undefined;
   showExposureControls: boolean;
+  handleExposure: (exposure: number) => void;
 }
+
 const ExposureControls = ({
-  handleExposure,
   handleShowExposureControls,
   exposure,
   showExposureControls,
+  handleExposure,
 }: ExposureControlsProps) => {
   const exposureOptions = useMemo(() => {
     return Platform.OS === 'ios' ? IOS_EXPOSURE_OPTIONS : ANDROID_EXPOSURE_OPTIONS;
@@ -26,14 +28,13 @@ const ExposureControls = ({
 
   const buttonTitle = useMemo(() => {
     return `x${exposure}`;
-  }, []);
+  }, [exposure]);
 
-  const handleExposurePress = useCallback((zoomFactor: number) => {
-    if (zoomFactor === -1) {
-      // RESET TO THE NATURAL ZOOM
-      handleExposure(NATURAL_ZOOM);
+  const handleExposurePress = useCallback((newExposure: string) => {
+    if (Number(newExposure) === -1) {
+      handleExposure(DEFAULT_EXPOSURE);
     } else {
-      handleExposure(Math.min(Math.max(zoomFactor, MIN_ZOOM), MAX_ZOOM));
+      handleExposure(Number(newExposure));
     }
   }, []);
 

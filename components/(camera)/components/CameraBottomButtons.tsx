@@ -15,14 +15,13 @@ interface CameraBottomButtonsProps {
   onStartRecording: () => void;
   isRecording: boolean;
   uiRotation: number;
-  setExposure: (exposure: number) => void;
   exposure: number | undefined;
+  setExposure: (exposure: number) => void;
 }
 
 const CameraBottomButtons: React.FC<CameraBottomButtonsProps> = ({
   setZoom,
   zoom,
-  setExposure,
   exposure,
   setShowZoomControls,
   showZoomControls,
@@ -32,6 +31,7 @@ const CameraBottomButtons: React.FC<CameraBottomButtonsProps> = ({
   onStartRecording,
   isRecording,
   uiRotation,
+  setExposure,
 }: CameraBottomButtonsProps) => {
   return (
     <View className="flex-1 flex-row items-end justify-between px-5">
@@ -48,10 +48,10 @@ const CameraBottomButtons: React.FC<CameraBottomButtonsProps> = ({
         uiRotation={uiRotation}
       />
       <ExposureButton
-        handleExposure={setExposure}
         handleShowExposureControls={setShowExposureControls}
         showExposureControls={showExposureControls}
         exposure={exposure}
+        handleExposure={setExposure}
       />
     </View>
   );

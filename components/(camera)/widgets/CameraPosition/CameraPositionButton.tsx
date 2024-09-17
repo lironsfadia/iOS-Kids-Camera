@@ -11,7 +11,7 @@ const CameraPositionButton = ({ position, togglePosition }: CameraPositionButton
     togglePosition(position === 'back' ? 'front' : 'back');
   };
   const icon = position === 'back' ? 'camera-reverse-outline' : 'camera-outline';
-  return <FuncCameraButton icon={icon} onPress={onPress} />;
+  return <FuncCameraButton icon={icon} onPress={onPress} containerStyle={'bg-white'} />;
 };
 
 export default CameraPositionButton;

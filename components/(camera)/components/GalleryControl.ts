@@ -3,11 +3,6 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import { Linking, Platform } from 'react-native';
 
 const useMediaGallery = () => {
-  const containterStyle = useMemo(() => {
-    {
-      alignSelf: 'center';
-    }
-  }, []);
   const link = useMemo(() => {
     return Platform.select({
       ios: 'photos-redirect://',

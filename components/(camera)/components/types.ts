@@ -56,6 +56,7 @@ export interface CameraControlsOutputs {
   setShowZoomControls: (showZoomControls: boolean) => void;
   showExposureControls: boolean;
   setShowExposureControls: (showExposureControls: boolean) => void;
+  setExposure: (exposure: number) => void;
 }
 
 export interface CameraViewProps {
@@ -85,6 +86,7 @@ export interface CameraViewProps {
   setShowExposureControls: (showExposureControls: boolean) => void;
   batteryInfo: BatteryInfo | undefined;
   setZoom: any;
+  setExposure: (exposure: number) => void;
 }
 
 export interface BatteryInfo {

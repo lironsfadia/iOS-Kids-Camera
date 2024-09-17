@@ -9,14 +9,14 @@ interface FuncCameraButtonProps {
   icon?: string;
   title?: string;
   onPress: () => void;
-  containerStyle?: StyleProp<any>;
+  containerStyle?: string;
 }
 
 const FuncCameraButton = ({ icon, title, onPress, containerStyle }: FuncCameraButtonProps) => {
   const colors = useThemeColor();
   return (
     <TouchableOpacity
-      style={[{ backgroundColor: 'white', borderRadius: 10, padding: 3 }, containerStyle]}
+      className={`radius-10 w-30 h-30 flex-row items-center justify-center rounded-lg p-1 ${containerStyle}`}
       onPress={onPress}>
       {icon ? <Ionicons name={icon} size={ICON_SIZE} color={colors.icon} /> : null}
       {title ? <ThemedText customClassName="text-white">{title}</ThemedText> : null}

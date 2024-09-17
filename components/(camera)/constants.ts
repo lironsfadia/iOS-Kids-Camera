@@ -6,5 +6,6 @@ export const MAX_ZOOM = 128;
 export const NATURAL_ZOOM = 1;
 export const ZOOM_OPTIONS = [1, 2, 3, 4, 5];
 
-export const IOS_EXPOSURE_OPTIONS = [-2, -1, 0, 1, 2];
+export const IOS_EXPOSURE_OPTIONS = [-8, -4, -2, 0, 2, 4];
 export const ANDROID_EXPOSURE_OPTIONS = [-10, -5, 0, 5, 10];
+export const DEFAULT_EXPOSURE = 0;

@@ -39,6 +39,7 @@ const CameraScreen = () => {
     setShowExposureControls,
     batteryInfo,
     exposure,
+    setExposure,
     //frameProcessor,
     ...cameraProps
   } = CameraControls();
@@ -73,6 +74,7 @@ const CameraScreen = () => {
           cameraPosition={cameraPosition}
           setCameraPosition={setCameraPosition}
           exposure={exposure}
+          setExposure={setExposure}
           isActive={isActive}
           cameraMode={cameraMode}
           isRecording={isRecording}

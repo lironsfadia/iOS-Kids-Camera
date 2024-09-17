@@ -4,15 +4,9 @@ import FuncCameraButton from './FuncCameraButton';
 import useMediaGallery from '../components/GalleryControl';
 
 const GalleryButton = () => {
-  const { onPress, containterStyle } = useMediaGallery();
+  const { onPress } = useMediaGallery();
 
-  return (
-    <FuncCameraButton
-      icon={'image-outline'}
-      onPress={onPress}
-      containerStyle={containterStyle}
-    />
-  );
+  return <FuncCameraButton icon={'image-outline'} onPress={onPress} />;
 };
 
 export default GalleryButton;

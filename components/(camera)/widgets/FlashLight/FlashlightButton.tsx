@@ -8,7 +8,7 @@ const FlashlightButton = ({ isOn, toggleFlashlight }: FlashlightButtonProps) => 
     toggleFlashlight,
   });
 
-  return <FuncCameraButton icon={icon} onPress={onToggleFlashlight} />;
+  return <FuncCameraButton icon={icon} onPress={onToggleFlashlight} containerStyle={'bg-white '} />;
 };
 
 export default FlashlightButton;

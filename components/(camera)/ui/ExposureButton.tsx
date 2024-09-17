@@ -5,24 +5,24 @@ import FuncCameraButton from './FuncCameraButton';
 import AnimatedCameraButton from './AnimatedCameraButton';
 
 interface ExposureButtonProps {
-  handleExposure: (exposure: number) => void;
   showExposureControls: boolean;
   exposure: number | undefined;
   handleShowExposureControls: (show: boolean) => void;
+  handleExposure: (exposure: number) => void;
 }
 
 const ExposureButton = ({
-  handleExposure,
   handleShowExposureControls,
   exposure,
   showExposureControls,
+  handleExposure,
 }: ExposureButtonProps) => {
   const { onPressExposureControls, handleExposurePress, exposureOptions, buttonTitle } =
     ExposureControls({
-      handleExposure,
       handleShowExposureControls,
       exposure,
       showExposureControls,
+      handleExposure,
     });
 
   return (
@@ -30,7 +30,7 @@ const ExposureButton = ({
       <FuncCameraButton
         title={buttonTitle}
         onPress={onPressExposureControls}
-        containerStyle={{ width: 30, height: 30, borderRadius: 20, backgroundColor: 'grey' }}
+        containerStyle={'bg-gray-800 w-50 h-50'}
       />
 
       {showExposureControls ? (

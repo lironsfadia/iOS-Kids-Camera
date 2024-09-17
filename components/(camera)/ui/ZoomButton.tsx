@@ -18,7 +18,7 @@ const ZoomButton = ({
   handleShowZoomControls,
   zoom,
 }: ZoomButtonProps) => {
-  const { onPressZoomControls, containerStyle, handleZoomPress, buttonTitleFormat } = ZoomControls({
+  const { onPressZoomControls, handleZoomPress, buttonTitleFormat } = ZoomControls({
     zoom,
     handleZoom,
     showZoomControls,
@@ -30,7 +30,7 @@ const ZoomButton = ({
       <FuncCameraButton
         title="+/-"
         onPress={onPressZoomControls}
-        containerStyle={{ width: 30, height: 30, borderRadius: 20, backgroundColor: 'grey' }}
+        containerStyle={'w-30 h-30 bg-gray-800'}
       />
 
       {showZoomControls ? (

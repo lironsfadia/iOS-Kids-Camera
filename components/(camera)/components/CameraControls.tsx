@@ -30,7 +30,6 @@ const CameraControls = (): CameraControlsOutputs => {
   const [photo, setPhoto] = useState<PhotoFile | null>(null);
   const [video, setVideo] = useState<VideoFile | null>(null);
   const [cameraPosition, setCameraPosition] = useState<'back' | 'front'>('back' as const);
-  const exposure = useRef(0);
 
   // telephoto-camera - is the default camera
   const device = useCameraDevice(cameraPosition, {
@@ -41,6 +40,8 @@ const CameraControls = (): CameraControlsOutputs => {
   const [error, setError] = useState<string | null>(null);
   const [uiRotation, setUiRotation] = useState(0);
   const [zoom, setZoom] = useState(device?.neutralZoom);
+  const [exposure, setExposure] = useState(device?.minExposure);
+
   const [showZoomControls, setShowZoomControls] = useState(false);
   const [showExposureControls, setShowExposureControls] = useState(false);
   const [batteryInfo, setBatteryInfo] = useState<BatteryInfo | undefined>(undefined);
@@ -200,7 +201,8 @@ const CameraControls = (): CameraControlsOutputs => {
     showExposureControls,
     setShowExposureControls,
     batteryInfo,
-    exposure: exposure.current,
+    exposure,
+    setExposure,
     //frameProcessor,
   };
 };
