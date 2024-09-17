@@ -21,12 +21,17 @@ const ZoomButton = ({
   const { onPressZoomControls, containerStyle, handleZoomPress, buttonTitleFormat } = ZoomControls({
     zoom,
     handleZoom,
+    showZoomControls,
     handleShowZoomControls,
   });
 
   return (
     <>
-      <FuncCameraButton title={'+/-'} onPress={onPressZoomControls} />
+      <FuncCameraButton
+        title="+/-"
+        onPress={onPressZoomControls}
+        containerStyle={{ width: 30, height: 30, borderRadius: 20, backgroundColor: 'grey' }}
+      />
 
       {showZoomControls ? (
         <AnimatedCameraButton

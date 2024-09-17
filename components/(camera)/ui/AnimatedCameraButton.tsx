@@ -9,10 +9,9 @@ import {
 } from 'react-native';
 
 import Animated, { BounceIn } from 'react-native-reanimated';
-import useThemeColor from '~/constants/Colors';
 
 interface AnimatedCameraButtonProps {
-  onPress: (isOn: boolean) => void;
+  onPress: () => void;
   handleOptionsPress: (option: number) => void;
   containerStyle?: StyleProp<any>;
   options: string[] | number[];
@@ -28,48 +27,54 @@ const AnimatedCameraButton = ({
   selectedOption,
   buttonTitleFormat,
 }: AnimatedCameraButtonProps) => {
-  const buttonTitle = buttonTitleFormat.replace('{0}', selectedOption ?? '');
+  const buttonTitle = buttonTitleFormat.replace('{0}', selectedOption?.toString() ?? '');
   const { width, height } = useWindowDimensions();
-  const radius = Math.min(width, height - 100) * 0.35;
-  const colors = useThemeColor();
+  const radius = Math.min(width, height - 100) * 0.25;
+
+  const enrichedOptions = options.map((option) => {
+    return {
+      optionValue: option,
+      onOptionPress: () => handleOptionsPress(Number(option)),
+    };
+  });
+
   return (
-    <View style={{ flex: 1, padding: 10 }}>
-      {options.map((z, i) => {
-        const angle = (i / options.length / 3) * 2 * Math.PI - Math.PI / 2; // Start at 12 o'clock
-        const x = Math.cos(angle) * radius + 40;
-        const y = Math.sin(angle) * radius + height / 4;
+    <View className="absolute bottom-3 left-0 right-0 items-center justify-center">
+      {enrichedOptions.map(({ optionValue, onOptionPress }, index) => {
+        const angle = (index / options.length / 3) * 2 * Math.PI - Math.PI / 2; // Start at 12 o'clock
+        const x = Math.cos(angle) * radius;
+        const y = Math.sin(angle) * radius;
 
         return (
           <Animated.View
-            key={i}
-            entering={BounceIn.delay(i * 100)}
+            key={index}
+            entering={BounceIn.delay(index * 100)}
             style={{
               position: 'absolute',
               left: x,
               top: y,
             }}>
             <TouchableHighlight
-              onPress={() => handleOptionsPress(z)}
+              onPress={onOptionPress}
               style={{
-                width: 50,
-                height: 50,
-                borderRadius: 25,
-                backgroundColor: selectedOption === z ? '#ffffff' : '#ffffff30',
+                width: 30,
+                height: 30,
+                borderRadius: 20,
+                backgroundColor: selectedOption === optionValue ? '#ffffff' : '#ffffff30',
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
               <Text
                 style={{
-                  color: selectedOption === z ? 'black' : 'white',
+                  color: selectedOption === optionValue ? 'black' : 'white',
                   fontWeight: '600',
                 }}>
-                {z}x
+                {optionValue}x
               </Text>
             </TouchableHighlight>
           </Animated.View>
         );
       })}
-
       <TouchableOpacity
         onPress={() => onPress(false)}
         style={{

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { View, TouchableOpacity, Text, Animated } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { BlurView } from 'expo-blur';
 
 const CameraInfoOverlay = ({ device, batteryInfo }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -39,7 +40,10 @@ const CameraInfoOverlay = ({ device, batteryInfo }) => {
   );
 
   return (
-    <View className="absolute bottom-1 left-4 right-4">
+    <BlurView
+      intensity={60}
+      tint="dark"
+      className="absolute bottom-1 left-4 right-4 overflow-hidden rounded-2xl">
       <TouchableOpacity
         onPress={toggleExpand}
         className="flex-row items-center justify-between rounded-full bg-black bg-opacity-50 px-4 py-2">
@@ -60,7 +64,7 @@ const CameraInfoOverlay = ({ device, batteryInfo }) => {
             Object.entries(batteryInfo).map(([key, value]) => renderInfoItem(key, value))}
         </View>
       </Animated.View>
-    </View>
+    </BlurView>
   );
 };
 

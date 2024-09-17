@@ -41,7 +41,7 @@ const CameraView = ({
 }: CameraViewProps) => {
   return (
     <>
-      <View className="flex-[2]">
+      <View className="flex-[4]">
         <Camera
           ref={camera}
           codeScanner={codeScanner}
@@ -96,18 +96,11 @@ const CameraView = ({
         />
       </View>
 
-      <View className="flex-1">
-        <View className="flex-[0.1]">
+      <View className="flex-[1.5] gap-7 bg-black py-3">
+        <View className="flex-[0.5]">
           <AnimatedInfoSection device={device} batteryInfo={batteryInfo} />
         </View>
-        <View
-          style={{
-            flex: 0.7,
-            backgroundColor: 'grey',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'space-between',
-          }}>
+        <View className="flex-[1]">
           <CameraBottomButtons
             setZoom={setZoom}
             zoom={zoom}

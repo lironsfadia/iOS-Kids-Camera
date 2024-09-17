@@ -4,9 +4,9 @@ import { useCaptureButtonProps } from '../components/types';
 export default function useCaptureButton({ uiRotation, isRecording }: useCaptureButtonProps) {
   const styles = StyleSheet.create({
     container: {
-      position: 'absolute',
-      alignSelf: 'center',
-      bottom: 50,
+      // position: 'absolute',
+      // alignSelf: 'center',
+      // bottom: 50,
     },
     uiRotate90: {
       position: 'absolute',

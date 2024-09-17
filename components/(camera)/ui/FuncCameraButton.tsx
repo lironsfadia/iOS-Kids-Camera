@@ -16,7 +16,7 @@ const FuncCameraButton = ({ icon, title, onPress, containerStyle }: FuncCameraBu
   const colors = useThemeColor();
   return (
     <TouchableOpacity
-      style={[containerStyle, { backgroundColor: 'white', borderRadius: 10, padding: 3 }]}
+      style={[{ backgroundColor: 'white', borderRadius: 10, padding: 3 }, containerStyle]}
       onPress={onPress}>
       {icon ? <Ionicons name={icon} size={ICON_SIZE} color={colors.icon} /> : null}
       {title ? <ThemedText customClassName="text-white">{title}</ThemedText> : null}

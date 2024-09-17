@@ -190,6 +190,7 @@ const CameraControls = (): CameraControlsOutputs => {
     format,
     uploadPhoto,
     zoom,
+    setZoom,
     torch,
     setTorch,
     cameraPosition,

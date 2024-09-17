@@ -3,19 +3,13 @@ import { View, Image, Button, StyleSheet } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 import { PhotoViewerProps } from './types';
+import { Stack } from 'expo-router';
 
-const PhotoViewer = ({
-  photo,
-  video,
-  uploadPhoto,
-  setPhoto,
-}: PhotoViewerProps) => {
+const PhotoViewer = ({ photo, video, uploadPhoto, setPhoto }: PhotoViewerProps) => {
   return (
     <>
-      <Image
-        source={{ uri: photo ? photo.path : video.path }}
-        style={styles.image}
-      />
+      <Stack.Screen options={{ headerShown: false }} />
+      <Image source={{ uri: photo ? photo.path : video.path }} style={styles.image} />
       <View style={styles.container}>
         <Button title="Upload" onPress={uploadPhoto} />
       </View>

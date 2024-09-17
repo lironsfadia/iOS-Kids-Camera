@@ -23,7 +23,6 @@ const CameraOverlayButtons = ({
     uiRotation,
     cameraModeHandler,
   });
-  console.log({ cameraPosition, cameraPositionHandler });
   return (
     <View style={containerStyle}>
       <VStack space="md">

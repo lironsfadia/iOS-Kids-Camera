@@ -3,7 +3,7 @@ import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 
 import { ICON_SIZE } from '~/components/(camera)/constants';
-import PermissionBox from '~/components/(settings)/components/PermissionBox';
+import PermissionBox from '~/components/(settings)/PermissionBox';
 import { ThemedText } from '~/components/ThemedText';
 import { ThemedView } from '~/components/ThemedView';
 import {
@@ -11,8 +11,9 @@ import {
   PERMISSIONS_TITLE_TEXT,
   REQUIRED_PERMISSIONS_TEXT,
 } from '~/components/(settings)/constants';
-import useSettings from '~/components/(settings)/hooks/useSettings';
+import useSettings from '~/hooks/useSettings';
 import { Stack } from 'expo-router';
+import AnimatedInfoSection from '~/components/(camera)/widgets/AnimatedInfoSection';
 
 const Settings = () => {
   const { permissions, handleContinue } = useSettings();

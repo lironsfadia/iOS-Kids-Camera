@@ -28,6 +28,7 @@ const CameraScreen = () => {
     setUiRotation,
     uiRotation,
     zoom,
+    setZoom,
     torch,
     setTorch,
     cameraPosition,
@@ -50,7 +51,7 @@ const CameraScreen = () => {
   if (!device) return <Text>Camera device not found</Text>;
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView className="flex-1">
       {(photo || video) && (
         <PhotoViewer
           photo={photo}
@@ -66,6 +67,7 @@ const CameraScreen = () => {
           camera={camera}
           device={device}
           zoom={zoom}
+          setZoom={setZoom}
           setTorch={setTorch}
           torch={torch}
           cameraPosition={cameraPosition}
@@ -93,10 +95,3 @@ const CameraScreen = () => {
 };
 
 export default CameraScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: Platform.OS == 'android' ? StatusBar.currentHeight : 0,
-  },
-});

@@ -1,10 +1,10 @@
 import { View } from 'react-native';
 
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { ICON_SIZE } from '../../(camera)/constants';
 import { ThemedText } from '~/components/ThemedText';
 import useThemeColor from '~/constants/Colors';
 import { Switch } from '~/components/ui/switch';
+import { ICON_SIZE } from './constants';
 
 interface PermissionBoxProps {
   title: string;

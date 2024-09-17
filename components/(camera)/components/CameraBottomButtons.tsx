@@ -34,7 +34,7 @@ const CameraBottomButtons: React.FC<CameraBottomButtonsProps> = ({
   uiRotation,
 }: CameraBottomButtonsProps) => {
   return (
-    <View>
+    <View className="flex-1 flex-row items-end justify-between px-5">
       <ZoomButton
         handleZoom={setZoom}
         showZoomControls={showZoomControls}

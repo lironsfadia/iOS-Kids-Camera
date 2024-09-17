@@ -2,18 +2,22 @@ import { useCallback, useMemo, useState } from 'react';
 import { MAX_ZOOM, MIN_ZOOM, NATURAL_ZOOM } from '../constants';
 
 interface ZoomControlsProps {
+  zoom: number | undefined;
+  showZoomControls: boolean;
   handleZoom: (zoom: number) => void;
   handleShowZoomControls: (show: boolean) => void;
-  zoom: number | undefined;
 }
+
 const ZoomControls = ({
   handleZoom,
+  showZoomControls,
   handleShowZoomControls,
   zoom,
 }: ZoomControlsProps) => {
   const buttonTitleFormat = useMemo(() => {
     return zoom && zoom > 0 ? '+{0}' : '{0}';
   }, [zoom]);
+
   const handleZoomPress = useCallback((zoomFactor: number) => {
     if (zoomFactor === -1) {
       // RESET TO THE NATURAL ZOOM
@@ -25,16 +29,18 @@ const ZoomControls = ({
 
   const containerStyle = useMemo(() => {
     return {
-      alignSelf: 'center',
+      position: 'absolute',
+      bottom: 20,
+      left: 0,
+      right: 0,
+      alignItems: 'center',
     };
   }, []);
 
-  const onPressZoomControls = useCallback(
-    (show: boolean) => {
-      handleShowZoomControls(!show);
-    },
-    [handleShowZoomControls]
-  );
+  const onPressZoomControls = useCallback(() => {
+    handleShowZoomControls(!showZoomControls);
+  }, [handleShowZoomControls, showZoomControls]);
+
   return {
     onPressZoomControls,
     containerStyle,
