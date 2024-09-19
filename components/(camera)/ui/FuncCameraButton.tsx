@@ -1,6 +1,6 @@
 import React from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleProp, StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { ThemedText } from '~/components/ThemedText';
 import useThemeColor from '~/constants/Colors';
 import { ICON_SIZE } from '../constants';

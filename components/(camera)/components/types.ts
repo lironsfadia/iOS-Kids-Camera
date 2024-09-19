@@ -8,14 +8,14 @@ import {
 } from 'react-native-vision-camera';
 
 export interface CameraOverlayButtonsProps {
-  flashMode: 'auto' | 'on' | 'off';
+  flashMode: 'auto' | 'on' | 'off' | undefined;
   flashModeHandler: (mode: 'auto' | 'on' | 'off') => void;
   cameraModeHandler: (mode: 'camera' | 'qr') => void;
   torchMode: boolean;
-  torchModeHandler: () => void;
+  torchModeHandler: (mode: 'on' | 'off') => void;
   uiRotation: number;
   cameraPosition: 'back' | 'front';
-  cameraPositionHandler: () => void;
+  cameraPositionHandler: (position: 'back' | 'front') => void;
 }
 
 export interface CameraControlsOutputs {
@@ -59,36 +59,6 @@ export interface CameraControlsOutputs {
   setExposure: (exposure: number) => void;
 }
 
-export interface CameraViewProps {
-  device: CameraDevice;
-  exposure: any;
-  torch: any;
-  isActive: boolean;
-  cameraMode: 'camera' | 'qr';
-  codeScanner: any;
-  setCameraMode: (mode: 'camera' | 'qr') => void;
-  camera: React.LegacyRef<Camera> | undefined;
-  isRecording: boolean;
-  flashMode: any;
-  setFlashMode: any;
-  onError: (error: any) => void;
-  setUiRotation: (rotation: number) => void;
-  uiRotation: number;
-  onTakePhotoPressed: () => void;
-  onStartRecording: () => void;
-  zoom: number | undefined;
-  setTorch: any;
-  cameraPosition: 'back' | 'front';
-  setCameraPosition: (position: 'back' | 'front') => void;
-  showZoomControls: boolean;
-  setShowZoomControls: (showZoomControls: boolean) => void;
-  showExposureControls: boolean;
-  setShowExposureControls: (showExposureControls: boolean) => void;
-  batteryInfo: BatteryInfo | undefined;
-  setZoom: any;
-  setExposure: (exposure: number) => void;
-}
-
 export interface BatteryInfo {
   level?: number | undefined;
   state?: string | undefined;
@@ -106,13 +76,6 @@ export interface CaptureButtonProps {
   longPressHandler?: () => void;
   isRecording: boolean;
   uiRotation: number;
-}
-
-export interface PhotoViewerProps {
-  photo?: { path: string } | null;
-  video?: { path: string } | null;
-  uploadPhoto: () => void;
-  setPhoto: (arg0: null) => void;
 }
 
 export interface useCaptureButtonProps {

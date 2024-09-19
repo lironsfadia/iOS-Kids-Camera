@@ -9,37 +9,39 @@ import CameraBottomButtons from './CameraBottomButtons';
 import CameraOverlayButtons from './CameraButtons';
 import { ThemedText } from '~/components/ThemedText';
 import AnimatedInfoSection from '../widgets/AnimatedInfoSection';
-import { CameraViewProps } from './types';
+import { useCamera } from '~/contexts/cameraContext';
 
-const CameraView = ({
-  device,
-  camera,
-  isActive,
-  cameraMode,
-  codeScanner,
-  setCameraMode,
-  isRecording,
-  flashMode,
-  setFlashMode,
-  onError,
-  setUiRotation,
-  uiRotation,
-  onTakePhotoPressed,
-  onStartRecording,
-  zoom,
-  setZoom,
-  exposure,
-  torch,
-  setTorch,
-  cameraPosition,
-  setCameraPosition,
-  showZoomControls,
-  setShowZoomControls,
-  showExposureControls,
-  setShowExposureControls,
-  batteryInfo,
-  setExposure,
-}: CameraViewProps) => {
+const CameraView = () => {
+  const {
+    device,
+    camera,
+    isActive,
+    cameraMode,
+    codeScanner,
+    setCameraMode,
+    isRecording,
+    flashMode,
+    setFlashMode,
+    onError,
+    setUiRotation,
+    uiRotation,
+    onTakePhotoPressed,
+    onStartRecording,
+    zoom,
+    setZoom,
+    exposure,
+    torch,
+    setTorch,
+    cameraPosition,
+    setCameraPosition,
+    showZoomControls,
+    setShowZoomControls,
+    showExposureControls,
+    setShowExposureControls,
+    batteryInfo,
+    setExposure,
+  } = useCamera();
+
   return (
     <>
       <View className="flex-[4]">

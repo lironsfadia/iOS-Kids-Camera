@@ -1,15 +1,16 @@
 import React from 'react';
 import { View, Image, Button, StyleSheet } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
-
-import { PhotoViewerProps } from './types';
 import { Stack } from 'expo-router';
 
-const PhotoViewer = ({ photo, video, uploadPhoto, setPhoto }: PhotoViewerProps) => {
+import { useCamera } from '~/contexts/cameraContext';
+
+const PhotoViewer = () => {
+  const { photo, video, setPhoto, uploadPhoto } = useCamera();
   return (
     <>
       <Stack.Screen options={{ headerShown: false }} />
-      <Image source={{ uri: photo ? photo.path : video.path }} style={styles.image} />
+      <Image source={{ uri: photo ? photo.path : video?.path }} style={styles.image} />
       <View style={styles.container}>
         <Button title="Upload" onPress={uploadPhoto} />
       </View>
