@@ -8,7 +8,8 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { useColorScheme } from '~/hooks/useColorScheme';
 import { GluestackUIProvider } from '~/components/ui/gluestack-ui-provider';
-import SettingsButton from '~/components/widgets/SettingsButton';
+import SettingsButton from '~/components/(settings)/widgets/SettingsButton';
+import { CameraProvider } from '~/contexts/cameraContext';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -35,25 +36,27 @@ export default function RootLayout() {
     <GestureHandlerRootView>
       <GluestackUIProvider mode="dark">
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-          <Stack
-            screenOptions={{
-              headerShown: true,
-              headerTitle: '',
-              headerBackTitle: '',
-              headerTintColor: 'white',
-              headerStyle: {
-                backgroundColor: 'transparent',
-              },
-              headerRight: () => (
-                <SettingsButton iconColor={colorScheme === 'dark' ? 'white' : 'black'} />
-              ),
-            }}>
-            <Stack.Screen name="index" options={{ headerShown: false }} />
-            <Stack.Screen name="camera" options={{ headerShown: true }} />
-            <Stack.Screen name="settings" options={{ headerShown: false }} />
-            <Stack.Screen name="loginScreen" options={{ headerShown: false }} />
-            <Stack.Screen name="+not-found" />
-          </Stack>
+          <CameraProvider>
+            <Stack
+              screenOptions={{
+                headerShown: true,
+                headerTitle: '',
+                headerBackTitle: '',
+                headerTintColor: 'white',
+                headerStyle: {
+                  backgroundColor: 'transparent',
+                },
+                headerRight: () => (
+                  <SettingsButton iconColor={colorScheme === 'dark' ? 'white' : 'black'} />
+                ),
+              }}>
+              <Stack.Screen name="index" options={{ headerShown: false }} />
+              <Stack.Screen name="camera" options={{ headerShown: true }} />
+              <Stack.Screen name="settings" options={{ headerShown: false }} />
+              <Stack.Screen name="loginScreen" options={{ headerShown: false }} />
+              <Stack.Screen name="+not-found" />
+            </Stack>
+          </CameraProvider>
         </ThemeProvider>
       </GluestackUIProvider>
     </GestureHandlerRootView>

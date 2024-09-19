@@ -1,5 +1,6 @@
-import { View, SafeAreaView, TouchableHighlight } from 'react-native';
 import React from 'react';
+import { View, SafeAreaView, TouchableHighlight } from 'react-native';
+import { Stack } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
 import { ICON_SIZE } from '~/components/(camera)/constants';
@@ -7,15 +8,18 @@ import PermissionBox from '~/components/(settings)/PermissionBox';
 import { ThemedText } from '~/components/ThemedText';
 import { ThemedView } from '~/components/ThemedView';
 import {
+  DEVICE_CAMERAS,
   PERMISSIONS_SUBTITLE_TEXT,
   PERMISSIONS_TITLE_TEXT,
   REQUIRED_PERMISSIONS_TEXT,
 } from '~/components/(settings)/constants';
 import useSettings from '~/hooks/useSettings';
-import { Stack } from 'expo-router';
+
+import { useCamera } from '~/contexts/cameraContext';
 import AnimatedInfoSection from '~/components/(camera)/widgets/AnimatedInfoSection';
 
 const Settings = () => {
+  const { device, batteryInfo } = useCamera();
   const { permissions, handleContinue } = useSettings();
 
   return (
@@ -51,6 +55,10 @@ const Settings = () => {
             />
           ))}
         </View>
+
+        <View className="p-3" />
+
+        <ThemedText type="title">{DEVICE_CAMERAS}</ThemedText>
 
         <View className="p-7" />
 
