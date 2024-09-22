@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { View, TouchableOpacity, Text, Animated } from 'react-native';
+
 import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 

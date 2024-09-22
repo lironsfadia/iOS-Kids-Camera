@@ -17,10 +17,7 @@ export default function useCameraOverlayButtons({
     [uiRotation]
   );
 
-  const containerStyle = useMemo(
-    () => StyleSheet.compose(styles.container, uiStyle),
-    [uiStyle]
-  );
+  const containerStyle = useMemo(() => StyleSheet.compose(styles.container, uiStyle), [uiStyle]);
 
   const handleCameraMode = useCallback(() => cameraModeHandler('qr'), []);
 

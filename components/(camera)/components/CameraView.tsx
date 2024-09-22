@@ -40,6 +40,7 @@ const CameraView = () => {
     setShowExposureControls,
     batteryInfo,
     setExposure,
+    frameProcessor,
   } = useCamera();
 
   return (
@@ -67,6 +68,7 @@ const CameraView = () => {
           resizeMode="cover"
           onError={onError}
           onUIRotationChanged={setUiRotation}
+          frameProcessor={frameProcessor}
         />
         {/* // in ios UIVisualEffectView */}
         <BlurView

@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { CameraRoll } from '@react-native-camera-roll/camera-roll';
+
 import { useFocusEffect } from 'expo-router';
 
 import {
@@ -11,11 +12,50 @@ import {
   useCodeScanner,
   getCameraFormat,
   Templates,
+  Frame,
+  VisionCameraProxy,
+  useSkiaFrameProcessor,
   useFrameProcessor,
 } from 'react-native-vision-camera';
 
 import RTNBatteryStatus from 'rtn-battery-status/js/NativeBatteryStatus';
 import { BatteryInfo, CameraControlsOutputs } from './types';
+import { ClipOp, Skia, TileMode } from '@shopify/react-native-skia';
+
+const plugin = VisionCameraProxy.initFrameProcessorPlugin('detectedFaces', {
+  performanceMode: 'fast',
+  contourMode: 'all',
+  landmarkMode: 'none',
+  classificationMode: 'none',
+});
+
+function detectFaces(frame: Frame) {
+  'worklet';
+  console.log('Processing frame:', frame);
+  if (plugin == null) {
+    throw new Error('Failed to load Frame Processor Plugin!');
+  }
+
+  return plugin.call(frame);
+}
+
+const frameProcessor = useSkiaFrameProcessor((frame) => {
+  'worklet';
+  const res = detectFaces(frame);
+
+  frame.render();
+  try {
+    if (res?.hasOwnProperty('faces')) {
+      for (const face of res.faces) {
+        const paint = Skia.Paint();
+        paint.setColor(Skia.Color('red'));
+        frame.drawRect(face.rect, paint);
+      }
+    }
+  } catch (error) {
+    console.error('Error processing frame:', error);
+  }
+}, []);
 
 const CameraControls = (): CameraControlsOutputs => {
   const [flashMode, setFlashMode] = useState<TakePhotoOptions['flash']>('off' as const);
@@ -40,11 +80,12 @@ const CameraControls = (): CameraControlsOutputs => {
   const [error, setError] = useState<string | null>(null);
   const [uiRotation, setUiRotation] = useState(0);
   const [zoom, setZoom] = useState(device?.neutralZoom);
-  const [exposure, setExposure] = useState(device?.minExposure);
+  const [exposure, setExposure] = useState(0);
 
   const [showZoomControls, setShowZoomControls] = useState(false);
   const [showExposureControls, setShowExposureControls] = useState(false);
   const [batteryInfo, setBatteryInfo] = useState<BatteryInfo | undefined>(undefined);
+  const [faces, setFaces] = React.useState<Face[]>();
 
   useEffect(() => {
     const checkBattery = async () => {
@@ -160,13 +201,6 @@ const CameraControls = (): CameraControlsOutputs => {
   //   [brightness, saturation, contrast, currentFilter]
   // );
 
-  // const frameProcessor = useFrameProcessor((frame) => {
-  //   'worklet';
-  //   const objects = scanFaces(frame);
-  //   const label = objects[0].name;
-  //   console.log(`You're looking at a ${label}.`);
-  // }, []);
-
   return {
     flashMode,
     setFlashMode,
@@ -203,7 +237,7 @@ const CameraControls = (): CameraControlsOutputs => {
     batteryInfo,
     exposure,
     setExposure,
-    //frameProcessor,
+    frameProcessor,
   };
 };
 
